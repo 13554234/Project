@@ -11,13 +11,13 @@ countnC <- c()
 countnD <- c()
 
 
-#We need probabilities for the treatments being successful depending on whether they're from group A or B
+#We need probabilities for the treatments being successful depending on what group they're from
 success_A <- 0.9
 success_B <- 0.4
 success_C <- 0.5
 success_D <- 0.7
 
-#So from the urn we pull a ball, if ball is from group A and we observe it's a success we add beta balls back into urn
+#So from the urn we pull a ball:
 n <- 100
 beta <- 0
 alpha <- 1
@@ -37,9 +37,9 @@ for (i in 1:n) {
       nD <- nD + beta
     }else{
       nA <- nA + beta
-      nB <- nB + beta
-      nC <- nC + beta
-      nD <- nD + beta
+      nB <- nB + alpha
+      nC <- nC + alpha
+      nD <- nD + alpha
     }               
   }else{
     if(ball == 'B'){
@@ -50,10 +50,10 @@ for (i in 1:n) {
         nC <- nC + beta
         nD <- nD + beta
       }else{
-        nA <- nA + beta
+        nA <- nA + alpha
         nB <- nB + beta
-        nC <- nC + beta
-        nD <- nD + beta
+        nC <- nC + alpha
+        nD <- nD + alpha
       }
     }else{
       if(ball == 'C'){
@@ -64,10 +64,10 @@ for (i in 1:n) {
           nC <- nC + alpha
           nD <- nD + beta
         }else{
-          nA <- nA + beta
-          nB <- nB + beta
+          nA <- nA + alpha
+          nB <- nB + alpha
           nC <- nC + beta
-          nD <- nD + beta
+          nD <- nD + alpha
         }
       }else{
         treat <- sample(c(0,1), 1, prob = c(success_D, 1-success_D))
@@ -77,9 +77,9 @@ for (i in 1:n) {
           nC <- nC + beta
           nD <- nD + alpha
         }else{
-          nA <- nA + beta
-          nB <- nB + beta
-          nC <- nC + beta
+          nA <- nA + alpha
+          nB <- nB + alpha
+          nC <- nC + alpha
           nD <- nD + beta
         }
       }}}
