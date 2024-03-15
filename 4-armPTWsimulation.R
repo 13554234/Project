@@ -96,7 +96,7 @@ countnD
 proportion <- c(countnA/(countnA+countnB+countnC+countnD))
 proportion
 proportion[100]
-plot(1:n, countnA, cex=.4)
+plot(1:n, countnA, cex=.4, xlab = 'Nth iteration of randomised play-the-winner rule', ylab = 'No. of subjects in each treatment arm')
 points(countnB, col = "red", cex=.4)
 points(countnC, col = "blue", cex=.4)
 points(countnD, col = "green", cex=.4)
@@ -104,4 +104,6 @@ lines(countnA)
 lines(countnB, col='red')
 lines(countnC, col = "blue")
 lines(countnD, col='green')
+
+
 
