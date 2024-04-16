@@ -1,0 +1,53 @@
+lambda_A <- 20
+lambda_B <- 14
+D <- 50
+R <- 30
+epsilon_A <- 1 - (lambda_A/D) + exp(-D/lambda_A)*(lambda_A/(D*R))*(exp(R/lambda_A)*(2*lambda_A - R) - 2*lambda_A)
+epsilon_B <- 1 - (lambda_B/D) + exp(-D/lambda_B)*(lambda_B/(D*R))*(exp(R/lambda_B)*(2*lambda_B - R) - 2*lambda_B)
+epsilon_A
+epsilon_B 
+nA <- 0
+nB <- 0 
+x <- 0.5
+
+counta <- c()
+countb <- c()
+
+rho <- (sqrt((lambda_A^3)*epsilon_B))/((sqrt((lambda_A^3)*epsilon_B))+(sqrt((lambda_B^3)*epsilon_A)))
+
+for (i in 1:70){
+  if(0 < x && x < 1){
+    g <- (rho*(rho/x)^2)/(rho*(rho/x)^2 + (1-rho)*((1-rho)/(1-x))^2)
+  }else{
+    if(x==1){
+      g<-1-x
+    }else{
+      if(x==0){
+        g<-1-x
+      }
+    }
+  }
+  ball <- sample(c("A", "B"), 1, prob = c(g, 1-g))
+  if(ball == 'A'){
+    nA <- nA + 1
+  }else{
+    if(ball == 'B'){
+      nB <- nB + 1
+    }}
+  x <- nA/(nA+nB)
+  counta <- c(counta, nA)
+  countb <- c(countb, nB)
+}
+counta
+countb
+
+
+
+plot(1:70, counta, cex=.7, xlab = 'Nth iteration of DABCD', ylab = 'No. of subjects in each treatment arm')
+points(countb, col = "red", cex=.7)
+lines(counta)
+lines(countb, col='red')
+abline(a=0, b=(sqrt((lambda_A^3)*epsilon_B))/((sqrt((lambda_A^3)*epsilon_B))+(sqrt((lambda_B^3)*epsilon_A))), col = "black", lwd=1.5)
+abline(a=0, b=(sqrt((lambda_B^3)*epsilon_A))/((sqrt((lambda_A^3)*epsilon_B))+(sqrt((lambda_B^3)*epsilon_A))), col = "red", lwd=1.5)
+
+
