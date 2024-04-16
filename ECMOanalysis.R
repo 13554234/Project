@@ -132,3 +132,9 @@ plot(1:n, countnA, cex=.7)
 points(countnB, col = "red", cex=.7)
 lines(countnA)
 lines(countnB, col='red')
+
+>  countn1
+[1] 34
+> countn2
+[1] 308
+
